@@ -13,21 +13,23 @@ Prof. Mayron César O. Moreira (DCC/UFLA)
 
 ## Descrição
 
-
+Este trabalho consiste em avaliar o aprendizado do discente em termos dos conteúdos de Programação Linear e Inteira vistos durante o curso. Para tanto, foi proposto um problema que deve ser resolvido como um programa linear ou inteiro, logo resolver por um solver genérico e por uma heurística definida, no caso desse trabalho  foi a Busca Tabu. Caso deseje mais detalhes basta ler o relatório.
 
 ## Diretórios
+
+📁 A pasta `relatorio` possui o relatório feito para o trabalho.
 
 📁 A pasta `instances` apresenta as instâncias do problema proposto.
 
 📁 A pasta `solver` apresenta os códigos utilizados no Gurobi.
 
-📁 A pasta `heuristica` apresenta os códigos utilizados no Busca Tabu.
+📁 A pasta `heuristica` apresenta os códigos utilizados na Busca Tabu.
 
 ## Como executar
 
 ### **Pré-requisitos**
 
-Antes de começar, você precisará ter a seguinte ferramenta instalada:
+Antes de começar, você precisará ter as seguintes ferramentas instaladas:
 
 - [Python](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/)
@@ -103,12 +105,14 @@ python imprimir_log.py <nome_arquivo_log>.txt
 Para o caso da `heuristica` o arquivo é `busca_tabu.py`. Deve-se executar o comando:
 
 ```bash
-python busca_tabu.py <nome_arquivo_saida>.txt ..\instances\<nome_instancia>.dat
+python busca_tabu.py <nome_arquivo_saida>.txt ..\instances\<nome_instancia>.dat [max_iter_sem_melhoria] [tabu_tenure]
 ```
+
+É possível definir um número para o máximo de iterações sem melhoria como critério de parada e a tabu tenure, se o usuário desejar.
 
 ### **Passo 6: Desativar o Ambiente Virtual**
 
-Quando terminar de trabalhar no trabalho, desative o ambiente virtual:
+Quando terminar de executar no trabalho, desative o ambiente virtual:
 
 ```bash
 deactivate

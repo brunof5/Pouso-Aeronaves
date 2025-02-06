@@ -174,13 +174,14 @@ def aplicar_intensificacao(n, avioes, s, ordem, tempos_pouso):
         return memoria_intensificacao[0]  # Retorna melhor solução
     return None
 
-def busca_tabu(n, avioes, s, ordem_atual, tempos_atual, objValue_atual, max_iter_sem_melhoria=20):
+def busca_tabu(n, avioes, s, ordem_atual, tempos_atual, objValue_atual, max_iter_sem_melhoria=20, tabu_tenure=None):
     # Solução global
     solucao_global = (ordem_atual, tempos_atual, objValue_atual)
 
     # Inicialização da Lista Tabu
     lista_tabu = []
-    tabu_tenure = n // 2
+    if tabu_tenure is None:
+        tabu_tenure = n // 2
 
     iter_sem_melhoria = 0
     while iter_sem_melhoria < max_iter_sem_melhoria:
@@ -245,11 +246,13 @@ def salvar_resultado(arquivo_saida, n, ordem_inicial, tempos_inicial, objValue_i
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Uso: python busca_tabu.py <arquivo_saida> <arquivo_instancia>")
+        print("Uso: python busca_tabu.py <arquivo_saida> <arquivo_instancia> [max_iter_sem_melhoria] [tabu_tenure]")
         sys.exit(1)
 
     arquivo_saida = sys.argv[1]
     arquivo_instancia = sys.argv[2]
+    max_iter = int(sys.argv[3]) if len(sys.argv) > 3 else 20
+    tabu_tenure = int(sys.argv[4]) if len(sys.argv) > 4 else None
 
     # Lê a instância do problema
     n, avioes, s = ler_instancia(arquivo_instancia)
@@ -262,7 +265,7 @@ if __name__ == "__main__":
     objValue_inicial = calcular_objValue(n, avioes, tempos_inicial)
 
     # Executa a Busca Tabu
-    ordem_encontrada, tempos_encontrados, objValue_encontrado = busca_tabu(n, avioes, s, ordem_inicial, tempos_inicial, objValue_inicial)
+    ordem_encontrada, tempos_encontrados, objValue_encontrado = busca_tabu(n, avioes, s, ordem_inicial, tempos_inicial, objValue_inicial, max_iter, tabu_tenure)
 
     # Calcula o tempo computacional
     tempo_fim = time.time()
